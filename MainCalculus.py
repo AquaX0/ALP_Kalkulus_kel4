@@ -37,8 +37,8 @@ def menu():
     print("2. Turunan - Central Difference")
     print("3. Integral - Trapezoidal Rule")
     print("4. Integral - Simpson 1/3 Rule")
-    print("0. Keluar")
-    return input("Pilih opsi (0-4): ")
+    print("5. Keluar")
+    return input("Pilih opsi (1-5): ")
 
 while True:
     pilihan = menu()
