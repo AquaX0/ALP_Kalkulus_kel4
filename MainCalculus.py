@@ -1,6 +1,7 @@
 from sympy import symbols, lambdify, sympify
 from ForwardDifference import forward_difference
 from CentralDifference import central_difference
+from simpson import simpson_one_third
 import math
 
 x_sym = symbols('x')
@@ -43,7 +44,7 @@ def menu():
 while True:
     pilihan = menu()
 
-    if pilihan == "0":
+    if pilihan == "5":
         print("Keluar dari program.")
         break
 
