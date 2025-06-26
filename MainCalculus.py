@@ -1,6 +1,7 @@
 from sympy import symbols, lambdify, sympify
 from ForwardDifference import forward_difference
 from CentralDifference import central_difference
+from TrapezoidalNOrder import trapezoidal_n_order
 from simpson import simpson_one_third
 import math
 
@@ -77,7 +78,7 @@ while True:
                 raise ValueError("n harus lebih dari nol.")
 
             if pilihan == "3":
-                result = trapezoidal(f, a, b, n)
+                result = trapezoidal_n_order(f, a, b, n)
                 method = "Trapezoidal Rule"
             else:
                 if n % 2 != 0:
