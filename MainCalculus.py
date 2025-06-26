@@ -3,6 +3,7 @@ from ForwardDifference import forward_difference
 from CentralDifference import central_difference
 from TrapezoidalNOrder import trapezoidal_n_order
 from simpson import simpson_one_third
+from CaseA_ExtremumAnalysis import case_a_extremum_analysis
 import math
 
 x_sym = symbols('x')
@@ -39,15 +40,31 @@ def menu():
     print("2. Turunan - Central Difference")
     print("3. Integral - Trapezoidal Rule")
     print("4. Integral - Simpson 1/3 Rule")
-    print("5. Keluar")
-    return input("Pilih opsi (1-5): ")
+    print("5. Kasus A - Titik Ekstrim Lokal")
+    print("6. Keluar")
+    return input("Pilih opsi (1-6): ")
 
 while True:
     pilihan = menu()
 
-    if pilihan == "5":
+    if pilihan == "6":
         print("Keluar dari program.")
         break
+
+    if pilihan == "5":
+        # Kasus A - Titik Ekstrim Lokal
+        print("\n=== KASUS A - TITIK EKSTRIM LOKAL ===")
+        print("Analisis titik ekstrim menggunakan metode bisection dan turunan numerik")
+        print("Fungsi yang akan dianalisis: f(x) = x³ - 6x² + 9x + 1")
+        
+        konfirmasi = input("\nJalankan analisis? (y/n): ")
+        if konfirmasi.lower() == 'y':
+            try:
+                numeric_results, exact_results = case_a_extremum_analysis()
+                print("\n✅ Analisis Kasus A selesai!")
+            except Exception as e:
+                print(f"❌ Error saat menjalankan Kasus A: {e}")
+        continue
 
     try:
         f, expr, unit_mode = input_function()
@@ -92,7 +109,7 @@ while True:
             print(f"Hasil integral numerik: {result}")
 
         else:
-            print("Opsi tidak valid. Silakan pilih 0-4.")
+            print("Opsi tidak valid. Silakan pilih 1-6.")
 
     except Exception as e:
         print("Terjadi kesalahan:", e)

@@ -46,11 +46,13 @@ Struktur folder dari repository ini adalah sebagai berikut:
 📦 ALP_Kalkulus_kel4/
  ┣ 📜 ForwardDifference.py        ← Implementasi metode Forward Difference
  ┣ 📜 CentralDifference.py        ← Implementasi metode Central Difference
- ┣ 📜 Trapezoidal.py              ← Implementasi metode Trapezoidal
- ┣ 📜 SimpsonOneThird.py          ← Implementasi metode Simpson's 1/3
- ┣ 📜 main.py                     ← Menu utama CLI interaktif
+ ┣ 📜 TrapezoidalNOrder.py        ← Implementasi metode Trapezoidal
+ ┣ 📜 simpson.py                  ← Implementasi metode Simpson's 1/3
+ ┣ 📜 BisectionMethod.py          ← Implementasi metode Bisection untuk Kasus A
+ ┣ 📜 CaseA_ExtremumAnalysis.py   ← Kasus A: Analisis titik ekstrim lokal
+ ┣ 📜 MainCalculus.py             ← Menu utama CLI interaktif
  ┣ 📜 README.md                   ← Dokumentasi proyek
- ┗ 📜 requirements.txt            ← (Opsional) Daftar dependensi
+ ┗ 📜 requirements.txt            ← Daftar dependensi Python
 ```
 ## ⚙️ Fungsi-Fungsi dalam Repository
 
@@ -180,7 +182,7 @@ venv\Scripts\activate     # Windows
 ### ▶️ 2. Jalankan program
 
 ```bash
-python main.py
+python MainCalculus.py
 ```
 
 Program akan menampilkan menu:
@@ -191,7 +193,8 @@ Program akan menampilkan menu:
 2. Turunan - Central Difference
 3. Integral - Trapezoidal Rule
 4. Integral - Simpson 1/3 Rule
-5. Keluar
+5. Kasus A - Titik Ekstrim Lokal
+6. Keluar
 ```
 
 ### 🧑‍💻 3. Input fungsi
@@ -233,5 +236,173 @@ Hasil integral numerik: 1.99999
 - Pastikan `n` genap saat memilih **Simpson 1/3 Rule**.
 - Gunakan `x` sebagai variabel, bukan `t` atau `y`.
 - Jangan gunakan `^` untuk pangkat, gunakan `**` (contoh: `x**2`, bukan `x^2`).
+
+---
+
+## 🎯 Kasus A - Titik Ekstrim Lokal
+
+### 📋 Deskripsi Kasus
+Kasus A bertujuan untuk menganalisis titik-titik ekstrim lokal dari sebuah fungsi menggunakan kombinasi metode numerik:
+1. **Turunan numerik** menggunakan Central Difference
+2. **Metode Bisection** untuk mencari akar dari turunan (titik stasioner)
+3. **Perbandingan** dengan hasil turunan eksak menggunakan SymPy
+
+### 🔬 Implementasi
+
+#### 🔷 5. BisectionMethod.py
+```python
+def bisection_method(f, a, b, tolerance=1e-6, max_iterations=100)
+def find_stationary_points(derivative_func, intervals, tolerance=1e-6)
+```
+
+**Metode Bisection** adalah algoritma numerik untuk mencari akar fungsi dalam interval tertentu. Algoritma ini bekerja dengan:
+1. Memastikan `f(a)` dan `f(b)` memiliki tanda berbeda
+2. Membagi interval `[a,b]` menjadi dua bagian di titik tengah `c = (a+b)/2`
+3. Memilih sub-interval yang mengandung akar berdasarkan perubahan tanda
+4. Mengulangi proses hingga mencapai toleransi yang diinginkan
+
+📘 **Rumus iterasi:**
+```
+c = (a + b) / 2
+Jika f(c) × f(a) < 0, maka b = c
+Jika f(c) × f(a) > 0, maka a = c
+```
+
+📌 **Parameter:**
+- `f`: fungsi yang akan dicari akarnya (dalam kasus ini f'(x))
+- `a, b`: batas interval pencarian
+- `tolerance`: toleransi error (default `1e-6`)
+- `max_iterations`: maksimum iterasi (default 100)
+
+✅ **Return:**
+- `root`: nilai akar yang ditemukan
+- `iterations`: jumlah iterasi yang digunakan
+
+---
+
+#### 🔷 6. CaseA_ExtremumAnalysis.py
+```python
+def case_a_extremum_analysis()
+def demo_other_functions()
+```
+
+File ini mengimplementasikan **analisis lengkap titik ekstrim lokal** dengan langkah-langkah:
+
+**🎯 Langkah 1: Definisi Fungsi**
+- Fungsi uji: `f(x) = x³ - 6x² + 9x + 1`
+- Turunan eksak: `f'(x) = 3x² - 12x + 9`
+- Titik stasioner eksak: `x₁ = 1`, `x₂ = 3`
+
+**🎯 Langkah 2: Turunan Numerik**
+- Menggunakan metode **Central Difference** dengan `h = 1e-6`
+- Membandingkan akurasi dengan turunan eksak
+
+**🎯 Langkah 3: Pencarian Titik Stasioner**
+- Menggunakan **Metode Bisection** untuk mencari akar f'(x)
+- Interval pencarian: `[0, 2]` dan `[2, 4]`
+- Membandingkan hasil numerik vs eksak
+
+**🎯 Langkah 4: Analisis Jenis Ekstrim**
+- Menggunakan **uji turunan kedua**: `f''(x) = 6x - 12`
+- Klasifikasi: 
+  - `f''(x) > 0` → Minimum lokal
+  - `f''(x) < 0` → Maksimum lokal
+  - `f''(x) = 0` → Titik infleksi
+
+**🎯 Langkah 5: Validasi dan Perbandingan**
+- Menghitung error antara metode numerik dan eksak
+- Menampilkan tabel perbandingan hasil
+
+### 📊 Contoh Output
+
+```
+============================================================
+           KASUS A - TITIK EKSTRIM LOKAL
+============================================================
+
+1. FUNGSI YANG DIANALISIS:
+   f(x) = x³ - 6x² + 9x + 1
+   f'(x) eksak = 3*x**2 - 12*x + 9
+
+2. TURUNAN NUMERIK:
+   Menggunakan metode Central Difference dengan h = 1e-6
+
+3. PENCARIAN TITIK STASIONER (AKAR f'(x)):
+   Interval pencarian: [(0, 2), (2, 4)]
+
+   a) Menggunakan turunan NUMERIK:
+   Titik stasioner 1:
+     x = 1.00000000
+     f(x) = 5.00000000
+     f'(x) numerik = 1.42e-08
+     Iterasi: 20
+
+   Titik stasioner 2:
+     x = 3.00000000
+     f(x) = 1.00000000
+     f'(x) numerik = -1.42e-08
+     Iterasi: 20
+
+4. PERBANDINGAN HASIL:
+   Solusi Eksak: x₁ = 1, x₂ = 3
+
+   Perbandingan Numerik vs Eksak:
+   --------------------------------------------------
+   |  Metode   |   x₁    |   x₂    |  Error₁ | Error₂ |
+   --------------------------------------------------
+   | Numerik   | 1.000000 | 3.000000 | 1.49e-08 | 1.49e-08 |
+   | Bisection | 1.000000 | 3.000000 | 1.49e-08 | 1.49e-08 |
+   --------------------------------------------------
+
+5. ANALISIS JENIS EKSTRIM:
+   Menggunakan uji turunan kedua f''(x) = 6x - 12
+   f''(x) = 6*x - 12
+   Titik 1: x = 1.000000
+           f''(x) = -6.000000 → Maksimum Lokal
+           f(x) = 5.000000
+   Titik 2: x = 3.000000
+           f''(x) = 6.000000 → Minimum Lokal
+           f(x) = 1.000000
+```
+
+### 🚀 Cara Menjalankan Kasus A
+
+```bash
+# Jalankan analisis lengkap
+python CaseA_ExtremumAnalysis.py
+```
+
+Atau jalankan fungsi spesifik dalam Python:
+```python
+from CaseA_ExtremumAnalysis import case_a_extremum_analysis
+numeric_results, exact_results = case_a_extremum_analysis()
+```
+
+### 🧪 Fungsi Demo Lain
+
+File ini juga menyediakan `demo_other_functions()` yang menunjukkan analisis titik ekstrim untuk:
+- **Fungsi trigonometri**: `f(x) = sin(x) + 0.5*cos(2x)`
+- **Interval**: `[0, 2π]`
+- **Implementasi otomatis** pencarian titik stasioner dalam beberapa sub-interval
+
+### 📈 Keunggulan Implementasi
+
+✅ **Akurasi Tinggi**: Error < 1e-8 dibandingkan solusi eksak  
+✅ **Robust**: Dapat menangani berbagai jenis fungsi  
+✅ **Modular**: Setiap komponen dapat digunakan secara terpisah  
+✅ **Validasi Lengkap**: Perbandingan dengan solusi analitik  
+✅ **Analisis Mendalam**: Klasifikasi jenis ekstrim menggunakan turunan kedua  
+
+### ⚙️ Dependencies Tambahan
+
+Untuk menjalankan Kasus A, install dependency berikut:
+```bash
+pip install sympy
+```
+
+**SymPy** digunakan untuk:
+- Menghitung turunan simbolik (eksak)
+- Membandingkan hasil numerik dengan solusi analitik
+- Melakukan diferensiasi otomatis untuk validasi
 
 ---
