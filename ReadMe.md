@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/429e0a20-942c-4769-99a0-add65544d786)# 🧮 ALP_Kalkulus_kel4 - Metode Numerik untuk Turunan dan Integral
+# 🧮 ALP_Kalkulus_kel4 - Metode Numerik untuk Turunan dan Integral
 
 ## 📌 Nama Proyek
 **Proyek Akhir Kalkulus – Metode Numerik untuk Turunan dan Integral**  
