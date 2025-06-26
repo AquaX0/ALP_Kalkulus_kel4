@@ -1,4 +1,4 @@
-# 🧮 ALP_Kalkulus_kel4 - Metode Numerik untuk Turunan dan Integral
+![image](https://github.com/user-attachments/assets/429e0a20-942c-4769-99a0-add65544d786)# 🧮 ALP_Kalkulus_kel4 - Metode Numerik untuk Turunan dan Integral
 
 ## 📌 Nama Proyek
 **Proyek Akhir Kalkulus – Metode Numerik untuk Turunan dan Integral**  
@@ -406,3 +406,128 @@ pip install sympy
 - Melakukan diferensiasi otomatis untuk validasi
 
 ---
+
+## 📐 Kasus B - Integral Tentu
+
+### 📋 Deskripsi Kasus
+
+Kasus B bertujuan untuk menghitung nilai integral tentu dari suatu fungsi  pada interval  menggunakan dua metode numerik:
+
+1. Metode Trapezoidal
+2. Metode Simpson 1/3
+
+Kasus ini digunakan untuk mengaproksimasi luas daerah di bawah kurva, terutama ketika integrasi simbolik tidak memungkinkan. Hasil dihitung berdasarkan jumlah partisi yang diberikan oleh pengguna, dan dibandingkan dengan hasil eksak bila tersedia.
+
+### 🔬 Implementasi
+
+🔷 1. TrapezoidalNOrder.py
+```
+def trapezoidal_rule(f, a, b, n)
+```
+Menghitung nilai integral tentu dengan pendekatan metode trapesium.
+
+### 📘 Rumus:
+
+![image](https://github.com/user-attachments/assets/421768a2-3548-4f51-b13e-c37691da4ead)
+
+dengan ![image](https://github.com/user-attachments/assets/4f620bf3-c9ea-4b4c-8ff8-6120478459fc)
+
+### 📌 Parameter:
+
+- f: fungsi Python satu variabel
+
+- a: batas bawah integrasi
+
+- b: batas atas integrasi
+
+- n: jumlah partisi (semakin besar, semakin akurat)
+
+### ✅ Return:
+
+Nilai pendekatan integral tentu dari f(x) pada interval [a, b].
+
+### 📎 Contoh penggunaan:
+```
+from math import sin, pi
+hasil = trapezoidal_rule(sin, 0, pi, 10)
+print(hasil)  # Output: mendekati 2.0
+```
+🔷 2. simpson.py
+```
+def simpson_one_third(f, a, b, n)
+```
+Menggunakan Simpson's 1/3 Rule, dengan jumlah partisi n yang harus genap, metode ini memberikan akurasi lebih tinggi dibanding trapesium untuk fungsi halus.
+
+### 📘 Rumus:
+
+![image](https://github.com/user-attachments/assets/ad3875f5-dc9d-48dc-a15d-d5f5702eaafc)
+
+### 📌 Parameter:
+
+- f: fungsi Python satu variabel
+
+- a: batas bawah integrasi
+
+- b: batas atas integrasi
+
+- n: jumlah partisi (genap)
+
+### ✅ Return:
+
+Hasil pendekatan integral tentu pada interval [a, b].
+
+### 📎 Contoh penggunaan:
+```
+from math import exp
+simpson_one_third(lambda x: exp(-x**2), 0, 1, 10)
+```
+🛑 Jika n ganjil, fungsi akan memunculkan error:
+```
+ValueError: n harus genap untuk Simpson's 1/3 rule.
+```
+### 🧪 Studi Kasus
+
+Misalkan ingin menghitung:
+
+![image](https://github.com/user-attachments/assets/05d82960-34f2-4bc2-a725-6d8ca23c59a7)
+
+Secara analitik:
+
+![image](https://github.com/user-attachments/assets/1c678699-a798-4e5e-a882-8a41cfb81fd9)
+
+📎 Dengan Trapezoidal (n = 10):
+```bash
+Hasil pendekatan: 9.135
+```
+📎 Dengan Simpson 1/3 (n = 10):
+```bash
+Hasil pendekatan: 9.0000
+```
+✅ Akurasi tinggi tercapai dengan jumlah partisi yang sesuai dan metode Simpson.
+
+### 🚀 Cara Menjalankan Kasus B
+
+Jalankan MainCalculus.py dan pilih:
+```
+3. Integral - Trapezoidal Rule
+4. Integral - Simpson 1/3 Rule
+```
+Masukkan fungsi, batas bawah a, batas atas b, dan jumlah partisi n.
+
+### 🧠 Tujuan Analisis
+
+- Menunjukkan efektivitas pendekatan numerik terhadap integrasi.
+
+- Membandingkan hasil numerik dengan solusi analitik.
+
+- Mengilustrasikan pengaruh jumlah partisi terhadap akurasi hasil.
+
+### ✅ Keunggulan Implementasi
+
+- Modular: Fungsi dapat digunakan terpisah untuk analisis lanjutan.
+
+- Aman: Validasi input partisi (Simpson) mencegah kesalahan logika.
+
+- Realis: Dapat diterapkan pada fungsi kompleks yang tidak memiliki solusi integral eksak.
+
+- Akurat: Performa tinggi untuk fungsi kontinyu dan halus.
